@@ -13,6 +13,7 @@ type Query{
 }
 
 type  Mutation{
+    createProduct(name:String, category:String, price:Float, stock:Int):Product
     updateStock(id:ID,stock:Int):Product
     receiveNewShipment(id:ID,quantity:Int):Product
 }

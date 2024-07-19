@@ -8,6 +8,7 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
 import com.shyam.entities.ProductEntity;
+import com.shyam.exceptions.ProductExistsException;
 import com.shyam.services.ProductService;
 
 import lombok.RequiredArgsConstructor;
@@ -39,5 +40,15 @@ public class ProductController {
     public ProductEntity receiveNewShipment(@Argument int id, @Argument int quantity) {
         return service.receiveNewShipment(id, quantity);
 
+    }
+    
+    @MutationMapping
+    public ProductEntity createProduct(
+        @Argument String name,
+        @Argument String category,
+        @Argument Float price,
+        @Argument Integer stock
+    ) throws ProductExistsException {
+        return service.addProduct(name, category, price, stock);
     }
 }
